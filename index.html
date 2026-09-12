@@ -1,608 +1,421 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Happy Little Mail</title>
-  <meta name="description" content="Tiny mail, big joy. A little envelope of joy, every month.">
-  <meta name="theme-color" content="#FFF8F2">
-  <meta property="og:title" content="Happy Little Mail">
-  <meta property="og:description" content="Tiny mail, big joy. A little envelope of joy, every month.">
-  <meta property="og:type" content="website">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --cream: #FFF8F2;
-      --cream-deep: #F3E4D4;
-      --blush: #F2C4BE;
-      --blush-deep: #D98980;
-      --blush-soft: #F8DED9;
-      --gold: #C9A36A;
-      --gold-deep: #B0894A;
-      --gold-soft: #E8D4A8;
-      --sage: #8FA888;
-      --sage-deep: #5F7A58;
-      --ink: #4A4036;
-      --ink-soft: #6B5F54;
-      --paper: #FFFCFA;
-      --shadow: 0 16px 40px rgba(90, 58, 46, 0.1);
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      margin: 0;
-      font-family: "Nunito", system-ui, sans-serif;
-      color: var(--ink);
-      background: var(--cream);
-      line-height: 1.65;
-      font-size: 1.05rem;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      background:
-        radial-gradient(720px 460px at 0% 0%, rgba(242, 196, 190, 0.55), transparent 62%),
-        radial-gradient(560px 380px at 100% 4%, rgba(201, 163, 106, 0.28), transparent 58%),
-        radial-gradient(640px 420px at 88% 100%, rgba(143, 168, 136, 0.22), transparent 60%);
-    }
-
-    header, main, footer { position: relative; z-index: 1; }
-
-    .wrap {
-      width: min(1040px, calc(100% - 2rem));
-      margin: 0 auto;
-    }
-
-    header {
-      padding: 1.1rem 0 0;
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.7rem;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .brand-mark {
-      width: 46px;
-      height: 46px;
-      flex: none;
-    }
-
-    .brand-name {
-      font-family: "Fredoka", sans-serif;
-      font-weight: 600;
-      font-size: 1.12rem;
-    }
-
-    .brand-tag {
-      display: block;
-      font-size: 0.78rem;
-      color: var(--sage-deep);
-      margin-top: -0.12rem;
-      font-weight: 700;
-    }
-
-    .hero {
-      padding: 2.4rem 0 1.4rem;
-    }
-
-    .hero-grid {
-      display: grid;
-      gap: 2rem;
-      align-items: start;
-    }
-
-    h1, h2, h3 {
-      font-family: "Fredoka", sans-serif;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      line-height: 1.15;
-    }
-
-    h1 {
-      font-size: clamp(2.35rem, 9vw, 4.1rem);
-      margin: 0 0 0.7rem;
-    }
-
-    .lede {
-      margin: 0 0 1.15rem;
-      max-width: 22ch;
-      font-size: clamp(1.12rem, 3.2vw, 1.38rem);
-      color: var(--ink-soft);
-      font-weight: 600;
-    }
-
-    .pill {
-      display: inline-block;
-      background: var(--blush-soft);
-      color: #7A4540;
-      border-radius: 999px;
-      padding: 0.28rem 0.75rem;
-      font-size: 0.78rem;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 0.9rem;
-    }
-
-    .product-shot { margin: 0; }
-
-    .product-shot img {
-      display: block;
-      width: 100%;
-      height: auto;
-      border-radius: 22px;
-    }
-
-    .photo-placeholder {
-      aspect-ratio: 4 / 3;
-      border: 2.5px dashed var(--gold-deep);
-      border-radius: 22px;
-      background:
-        repeating-linear-gradient(
-          -12deg,
-          rgba(232, 212, 168, 0.18) 0 10px,
-          transparent 10px 20px
-        ),
-        linear-gradient(180deg, #FFFDF9, var(--blush-soft));
-      display: grid;
-      place-items: center;
-      padding: 1.25rem;
-      box-shadow: var(--shadow);
-    }
-
-    .photo-placeholder-inner { text-align: center; color: var(--ink-soft); }
-
-    .frame-icon {
-      width: 72px;
-      height: 56px;
-      margin: 0 auto 0.7rem;
-    }
-
-    .photo-placeholder p {
-      margin: 0;
-      font-family: "Fredoka", sans-serif;
-      font-size: 1.2rem;
-      color: var(--ink);
-    }
-
-    .photo-placeholder small {
-      display: block;
-      margin-top: 0.35rem;
-      font-size: 0.85rem;
-    }
-
-    section { padding: 3rem 0; }
-
-    .section-kicker {
-      display: inline-block;
-      font-size: 0.75rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--sage-deep);
-      font-weight: 800;
-      margin-bottom: 0.55rem;
-    }
-
-    h2 {
-      font-size: clamp(1.7rem, 4.4vw, 2.3rem);
-      margin: 0 0 0.9rem;
-    }
-
-    .intro { max-width: 38rem; }
-
-    .intro p {
-      margin: 0 0 0.9rem;
-      font-size: 1.1rem;
-    }
-
-    .cards, .steps {
-      display: grid;
-      gap: 0.9rem;
-      margin-top: 1.5rem;
-    }
-
-    .card, .step {
-      border-radius: 24px;
-      padding: 1.3rem 1.25rem 1.4rem;
-      box-shadow: 0 8px 22px rgba(90, 58, 46, 0.05);
-    }
-
-    .card:nth-child(1) { background: #FBECEA; }
-    .card:nth-child(2) { background: #FFF6E8; }
-    .card:nth-child(3) { background: #F3F6EE; }
-    .card:nth-child(4) { background: #F8E8E4; }
-    .step { background: var(--paper); border: 1px solid rgba(201, 163, 106, 0.28); }
-
-    .card-icon {
-      width: 52px;
-      height: 52px;
-      margin-bottom: 0.7rem;
-    }
-
-    .card h3, .step h3 {
-      margin: 0 0 0.4rem;
-      font-size: 1.22rem;
-    }
-
-    .card p, .step p {
-      margin: 0;
-      color: var(--ink-soft);
-    }
-
-    .step-num {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      font-family: "Fredoka", sans-serif;
-      font-weight: 600;
-      margin-bottom: 0.75rem;
-      color: #fff;
-    }
-
-    .step:nth-child(1) .step-num { background: var(--blush-deep); }
-    .step:nth-child(2) .step-num { background: var(--gold-deep); }
-    .step:nth-child(3) .step-num { background: var(--sage-deep); }
-
-    .pricing { text-align: center; }
-
-    .price-card {
-      margin: 1.5rem auto 0;
-      max-width: 400px;
-      background: var(--paper);
-      border-radius: 28px;
-      padding: 2.3rem 1.45rem 1.85rem;
-      border: 1.5px solid var(--gold-soft);
-      box-shadow: var(--shadow);
-      position: relative;
-    }
-
-    .price-card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 10%;
-      right: 10%;
-      height: 12px;
-      background: linear-gradient(90deg, var(--blush-deep), var(--gold), var(--sage));
-      border-radius: 0 0 14px 14px;
-    }
-
-    .plan-name {
-      margin: 0.45rem 0 0.3rem;
-      font-size: 1.65rem;
-    }
-
-    .price {
-      font-family: "Fredoka", sans-serif;
-      font-size: 3rem;
-      line-height: 1;
-      margin: 0.35rem 0 0.2rem;
-    }
-
-    .price span {
-      font-size: 1.05rem;
-      color: var(--ink-soft);
-      font-family: "Nunito", sans-serif;
-      font-weight: 700;
-    }
-
-    .price-note {
-      margin: 0.9rem 0 0;
-      color: var(--sage-deep);
-      font-weight: 700;
-    }
-
-    .cta {
-      text-align: center;
-      padding-bottom: 3.6rem;
-    }
-
-    .cta p {
-      max-width: 32rem;
-      margin: 0 auto 1.4rem;
-      color: var(--ink-soft);
-    }
-
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.7rem;
-    }
-
-    button {
-      font-family: inherit;
-      font-size: 1rem;
-      font-weight: 800;
-      border: 0;
-      cursor: pointer;
-      border-radius: 999px;
-      padding: 0.9rem 1.3rem;
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
-    }
-
-    button:focus-visible {
-      outline: 3px solid var(--gold);
-      outline-offset: 3px;
-    }
-
-    .btn-love {
-      background: var(--blush-deep);
-      color: #fff;
-      box-shadow: 0 8px 18px rgba(217, 137, 128, 0.32);
-    }
-
-    .btn-share {
-      background: var(--paper);
-      color: var(--ink);
-      border: 1.5px solid var(--gold-deep);
-    }
-
-    button:hover { transform: translateY(-1px); }
-
-    .toast {
-      min-height: 1.4rem;
-      margin-top: 0.95rem;
-      color: var(--sage-deep);
-      font-weight: 700;
-    }
-
-    footer {
-      padding: 0 0 2.2rem;
-      text-align: center;
-      color: var(--ink-soft);
-      font-size: 0.92rem;
-    }
-
-    .stamp {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-    }
-
-    @media (min-width: 720px) {
-      .hero { padding: 3.4rem 0 1.6rem; }
-      .hero-grid {
-        grid-template-columns: 1.05fr 0.9fr;
-        gap: 3.2rem;
-        align-items: center;
-      }
-      .hero-copy { padding-bottom: 0.4rem; }
-      .photo-placeholder { aspect-ratio: 1 / 1; }
-      .cards { grid-template-columns: repeat(2, 1fr); }
-      .steps { grid-template-columns: repeat(3, 1fr); }
-      section { padding: 3.6rem 0; }
-    }
-
-    @media (min-width: 980px) {
-      .cards { grid-template-columns: repeat(4, 1fr); }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      button { transition: none; }
-    }
-  </style>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Happy Little Mail</title>
+<script src="c0890efe.js"></script>
+<script src="47882ee1.js"></script>
+<script src="605ed2f5.js"></script>
 </head>
 <body>
-  <header>
-    <div class="wrap">
-      <a class="brand" href="#top">
-        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
-          <rect width="64" height="64" rx="18" fill="#F2C4BE"/>
-          <rect x="11" y="20" width="42" height="28" rx="6" fill="#FFF8F2"/>
-          <path d="M13 23l19 13 19-13" fill="none" stroke="#C9A36A" stroke-width="2.6" stroke-linecap="round"/>
-          <circle cx="50" cy="18" r="9" fill="#8FA888"/>
-          <path d="M50 13.8v8.4M45.8 18h8.4" stroke="#FFF8F2" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-        <span>
-          <span class="brand-name">Happy Little Mail</span>
-          <span class="brand-tag">tiny and joyful</span>
-        </span>
-      </a>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<style>/* hebrew */
+@font-face {
+  font-family: 'Fredoka';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("cb330e1b.woff2") format('woff2');
+  unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Fredoka';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("5167facd.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Fredoka';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("b6196555.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* hebrew */
+@font-face {
+  font-family: 'Fredoka';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("cb330e1b.woff2") format('woff2');
+  unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Fredoka';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("5167facd.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Fredoka';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("b6196555.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* hebrew */
+@font-face {
+  font-family: 'Fredoka';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("cb330e1b.woff2") format('woff2');
+  unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Fredoka';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("5167facd.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Fredoka';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("b6196555.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("de05a273.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("f48285ad.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("00795029.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("bab394f2.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("2b3bb553.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("de05a273.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("f48285ad.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("00795029.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("bab394f2.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("2b3bb553.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("de05a273.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("f48285ad.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("00795029.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("bab394f2.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("2b3bb553.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Space Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("829be0f8.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Space Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("d19f1ebb.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Space Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("349e3ccc.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<style>
+  body { margin: 0; background: #FBF5E7; }
+  a { color: #C2647C; text-decoration: none; }
+  a:hover { color: #A04A62; text-decoration: underline; }
+  @keyframes hlm-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+</style>
+</helmet>
+<div style="font-family: Nunito, system-ui, sans-serif; color: #57453D; background: #FBF5E7; overflow-x: hidden">
+
+  <header style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 22px clamp(20px, 5vw, 64px); max-width: 1200px; margin: 0 auto">
+    <div style="display: flex; align-items: center; gap: 10px">
+      <div style="width: 26px; height: 26px; border-radius: 999px; background: #F3C3CD"></div>
+      <span style="font-family: Fredoka, sans-serif; font-weight: 500; font-size: 18px; letter-spacing: 0.01em">Happy Little Mail</span>
     </div>
+    <a href="#pricing" style="font-family: Fredoka, sans-serif; font-weight: 500; font-size: 15px; color: #57453D; padding: 9px 20px; border-radius: 999px; background: #FFFFFF; box-shadow: 0 2px 10px rgba(87,69,61,0.08)" style-hover="text-decoration: none; color: #57453D; background: #F6E3C4">$15 / month</a>
   </header>
 
-  <main id="top">
-    <section class="hero">
-      <div class="wrap hero-grid">
-        <div class="hero-copy">
-          <p class="pill">Monthly tiny mail</p>
-          <h1>Tiny mail, big joy</h1>
-          <p class="lede">A little envelope of joy, every month</p>
-        </div>
-        <figure class="product-shot" id="product-photo">
-          <!--
-            Jaime: replace the dashed .photo-placeholder below with your photo:
-            <img src="product.jpg" alt="A Happy Little Mail envelope filled with tiny stationery">
-          -->
-          <div class="photo-placeholder" role="img" aria-label="Your product photo here">
-            <div class="photo-placeholder-inner">
-              <svg class="frame-icon" viewBox="0 0 72 56" fill="none" aria-hidden="true">
-                <rect x="2" y="8" width="68" height="42" rx="8" stroke="#B0894A" stroke-width="2.4" stroke-dasharray="5 4"/>
-                <path d="M8 16h56v26H8z" fill="#FFF8F2"/>
-                <path d="M10 18l26 16 26-16" stroke="#D98980" stroke-width="2.2" stroke-linecap="round"/>
-              </svg>
-              <p>Your product photo here</p>
-              <small>A small envelope, softly lit, on cream paper</small>
-            </div>
-          </div>
-        </figure>
+  <section style="max-width: 1200px; margin: 0 auto; padding: clamp(20px, 4vw, 48px) clamp(20px, 5vw, 64px) clamp(48px, 8vw, 100px)">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: clamp(32px, 5vw, 72px); align-items: center">
+      <div style="min-width: 0">
+        <div style="display: inline-block; font-family: Space Mono, monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #8A6A4F; background: #F6E3C4; border-radius: 999px; padding: 7px 15px; margin-bottom: 24px">Tiny joy, monthly</div>
+        <h1 style="font-family: Fredoka, sans-serif; font-weight: 500; font-size: clamp(40px, 6.2vw, 74px); line-height: 1.02; letter-spacing: -0.02em; margin: 0 0 22px; text-wrap: balance; color: #4A392F">Small moments,<br><span style="color: #C2647C">big happiness.</span></h1>
+        <p style="font-size: clamp(17px, 1.9vw, 20px); line-height: 1.65; margin: 0 0 32px; max-width: 46ch; text-wrap: pretty; color: #6B584E">A little envelope of joy, delivered to your door every month. Tiny stickers, mini pop-up cards, and happy little surprises.</p>
+        <form sc-camel-on-submit="{{ onSubmit }}" style="display: flex; flex-wrap: wrap; gap: 10px; max-width: 490px">
+          <input type="email" required="" placeholder="you@yourmailbox.com" value="{{ email }}" sc-camel-on-change="{{ onEmail }}" style="flex: 1 1 220px; min-width: 0; font-family: Nunito, sans-serif; font-size: 16px; padding: 16px 22px; border-radius: 999px; border: 1.5px solid #E8D9C4; background: #FFFFFF; color: #57453D; outline: none" style-focus="border-color: #C2647C">
+          <button type="submit" style="font-family: Fredoka, sans-serif; font-weight: 500; font-size: 16px; padding: 16px 30px; border-radius: 999px; border: none; background: #C2647C; color: #FFFFFF; cursor: pointer; white-space: nowrap; box-shadow: 0 6px 18px rgba(194,100,124,0.3); transition: transform .15s ease, box-shadow .15s ease" style-hover="transform: translateY(-2px); box-shadow: 0 10px 24px rgba(194,100,124,0.35)">Join the waitlist</button>
+        </form>
+        <p style="font-family: Space Mono, monospace; font-size: 12px; color: #75614F; margin: 14px 0 0">{{ formNote }}</p>
       </div>
-    </section>
-
-    <section id="what">
-      <div class="wrap intro">
-        <span class="section-kicker">What it is</span>
-        <h2>A pocket-size gift, sent through the mail</h2>
-        <p>Once a month, a small standard envelope arrives with a Forever stamp and a handful of tiny, delightful things. Think kawaii stickers, miniature stationery, flat washi samples, and a short handwritten letter.</p>
-        <p>Everything stays flat and light on purpose. The joy is in how small it feels, like a secret that still fits in your mailbox.</p>
-        <p>It is mail you can hold in one hand, made for people who love little treasures.</p>
+      <div style="min-width: 0; position: relative">
+        <div style="position: absolute; inset: 6% -4% -6% 6%; border-radius: 32px; background: #F3E1E5"></div>
+        <img src="product.png" alt="A pink envelope filled with tiny stickers, notes, a pop-up flower card and little charms" style="position: relative; display: block; width: 100%; height: auto; border-radius: 28px; box-shadow: 0 24px 60px rgba(87,69,61,0.16)">
+        <div style="position: absolute; left: -14px; bottom: 8%; background: #FFFFFF; border-radius: 999px; padding: 10px 18px; font-family: Fredoka, sans-serif; font-size: 14px; color: #6E8A63; box-shadow: 0 8px 22px rgba(87,69,61,0.14); animation: hlm-float 6s ease-in-out infinite">Fits in one envelope</div>
       </div>
-    </section>
-
-    <section id="inside">
-      <div class="wrap">
-        <span class="section-kicker">What’s inside</span>
-        <h2>Four tiny kinds of delight</h2>
-        <div class="cards">
-          <article class="card">
-            <svg class="card-icon" viewBox="0 0 64 64" aria-hidden="true">
-              <rect x="6" y="8" width="32" height="32" rx="8" fill="#D98980"/>
-              <path d="M16 24h12M22 18v12" stroke="#FFF8F2" stroke-width="2.6" stroke-linecap="round"/>
-              <rect x="24" y="24" width="34" height="32" rx="8" fill="#FFF8F2" stroke="#C9A36A" stroke-width="2.2"/>
-              <circle cx="36" cy="40" r="5" fill="#8FA888"/>
-              <circle cx="48" cy="40" r="5" fill="#D98980"/>
-            </svg>
-            <h3>Kawaii stickers</h3>
-            <p>Tiny characters and sweet little sheets for journals, letters, and laptop corners.</p>
-          </article>
-          <article class="card">
-            <svg class="card-icon" viewBox="0 0 64 64" aria-hidden="true">
-              <rect x="14" y="8" width="36" height="48" rx="7" fill="#FFF8F2" stroke="#B0894A" stroke-width="2.4"/>
-              <path d="M24 22h16M24 31h14M24 40h10" stroke="#8FA888" stroke-width="2.4" stroke-linecap="round"/>
-            </svg>
-            <h3>Mini stationery</h3>
-            <p>Miniature notes and cards, just the right size for a kind word.</p>
-          </article>
-          <article class="card">
-            <svg class="card-icon" viewBox="0 0 64 64" aria-hidden="true">
-              <rect x="6" y="24" width="52" height="16" rx="5" fill="#D98980" transform="rotate(-10 32 32)"/>
-              <rect x="8" y="26" width="48" height="6" rx="2" fill="#FFF8F2" transform="rotate(-10 32 29)" opacity="0.45"/>
-            </svg>
-            <h3>Flat washi samples</h3>
-            <p>Soft patterns you can try without a bulky roll. Pretty, thin, and ready to use.</p>
-          </article>
-          <article class="card">
-            <svg class="card-icon" viewBox="0 0 64 64" aria-hidden="true">
-              <path d="M10 46V20l22-10 22 10v26" fill="#FFF8F2" stroke="#5F7A58" stroke-width="2.4" stroke-linejoin="round"/>
-              <path d="M10 20l22 12 22-12" fill="none" stroke="#C9A36A" stroke-width="2.4"/>
-              <circle cx="32" cy="36" r="4" fill="#D98980"/>
-            </svg>
-            <h3>A pop-up surprise</h3>
-            <p>Now and then, a tiny pop-up card that still slips into the envelope.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="how">
-      <div class="wrap">
-        <span class="section-kicker">How it works</span>
-        <h2>Three gentle steps</h2>
-        <div class="steps">
-          <article class="step">
-            <div class="step-num">1</div>
-            <h3>Subscribe</h3>
-            <p>Choose The Little Envelope. One simple plan, once a month.</p>
-          </article>
-          <article class="step">
-            <div class="step-num">2</div>
-            <h3>We curate</h3>
-            <p>Each month we gather a tiny, joyful mix that still mails cheaply.</p>
-          </article>
-          <article class="step">
-            <div class="step-num">3</div>
-            <h3>Check your mailbox</h3>
-            <p>A Forever-stamped envelope arrives, ready to open with a cup of tea.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="pricing" id="pricing">
-      <div class="wrap">
-        <span class="section-kicker">Pricing</span>
-        <h2>One little plan</h2>
-        <div class="price-card">
-          <h3 class="plan-name">The Little Envelope</h3>
-          <p class="price">$15 <span>/ month</span></p>
-          <p>A standard envelope, stuffed with miniature joy.</p>
-          <p class="price-note">Yearly gets a month free.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="cta" id="share">
-      <div class="wrap">
-        <span class="section-kicker">Pass it on</span>
-        <h2>If this made you smile, share it</h2>
-        <p>This is a first look for friends, not a shop yet. If you would love a tiny envelope like this, let someone know.</p>
-        <div class="actions">
-          <button type="button" class="btn-love" id="love-btn">I’d love this</button>
-          <button type="button" class="btn-share" id="share-btn">Share with a friend</button>
-        </div>
-        <p class="toast" id="toast" aria-live="polite"></p>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="wrap">
-      <p class="stamp">
-        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-          <rect x="3" y="5" width="18" height="14" rx="3" fill="none" stroke="#C9A36A" stroke-width="1.7"/>
-          <path d="M4 7l8 6 8-6" fill="none" stroke="#D98980" stroke-width="1.7"/>
-        </svg>
-        Happy Little Mail · tiny and joyful
-      </p>
     </div>
+  </section>
+
+  <section style="background: #FFFFFF">
+    <div style="max-width: 780px; margin: 0 auto; padding: clamp(52px, 8vw, 104px) clamp(20px, 5vw, 64px); text-align: center">
+      <h2 style="font-family: Fredoka, sans-serif; font-weight: 500; font-size: clamp(26px, 3.6vw, 40px); letter-spacing: -0.015em; margin: 0 0 20px; color: #4A392F">A brighter day, in the mail</h2>
+      <p style="font-size: clamp(17px, 2vw, 20px); line-height: 1.7; margin: 0; text-wrap: pretty; color: #6B584E">Every month we tuck a handful of tiny, lovely things into a pink envelope and send it your way. Stickers to keep, a note to smile at, something small to carry in your pocket. It's the nicest thing in your mailbox, and it costs less than lunch.</p>
+    </div>
+  </section>
+
+  <section style="max-width: 1200px; margin: 0 auto; padding: clamp(52px, 8vw, 104px) clamp(20px, 5vw, 64px)">
+    <h2 style="font-family: Fredoka, sans-serif; font-weight: 500; font-size: clamp(26px, 3.6vw, 40px); letter-spacing: -0.015em; margin: 0 0 8px; color: #4A392F">What's inside</h2>
+    <p style="font-size: 17px; color: #7C6558; margin: 0 0 40px">A different little bundle every month.</p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(265px, 1fr)); gap: 24px">
+      <sc-for list="{{ items }}" as="item" hint-placeholder-count="4">
+        <article style="background: #FFFFFF; border-radius: 24px; padding: 16px; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 10px 30px rgba(87,69,61,0.08); transition: transform .18s ease, box-shadow .18s ease" style-hover="transform: translateY(-6px); box-shadow: 0 18px 40px rgba(87,69,61,0.13)">
+          <div style="aspect-ratio: 4 / 3; border-radius: 16px; background-image: url(&quot;product.png&quot;); background-size: 260%; background-position: {{ item.pos }}"></div>
+          <div style="padding: 0 6px 8px">
+            <h3 style="font-family: Fredoka, sans-serif; font-weight: 500; font-size: 20px; margin: 0 0 7px; color: #4A392F">{{ item.title }}</h3>
+            <p style="font-size: 15px; line-height: 1.55; color: #6B584E; margin: 0; text-wrap: pretty">{{ item.body }}</p>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="background: #EDF1E6">
+    <div style="max-width: 1080px; margin: 0 auto; padding: clamp(52px, 8vw, 104px) clamp(20px, 5vw, 64px)">
+      <h2 style="font-family: Fredoka, sans-serif; font-weight: 500; font-size: clamp(26px, 3.6vw, 40px); letter-spacing: -0.015em; margin: 0 0 44px; text-align: center; color: #3F4E38">How it works</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 32px">
+        <sc-for list="{{ steps }}" as="step" hint-placeholder-count="3">
+          <div style="display: flex; flex-direction: column; gap: 12px; align-items: flex-start">
+            <div style="width: 44px; height: 44px; border-radius: 999px; background: #FFFFFF; display: flex; align-items: center; justify-content: center; font-family: Fredoka, sans-serif; font-weight: 500; font-size: 18px; color: #6E8A63">{{ step.n }}</div>
+            <h3 style="font-family: Fredoka, sans-serif; font-weight: 500; font-size: 21px; margin: 0; color: #3F4E38">{{ step.title }}</h3>
+            <p style="font-size: 16px; line-height: 1.6; color: #4F5C48; margin: 0; text-wrap: pretty">{{ step.body }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing" style="max-width: 1200px; margin: 0 auto; padding: clamp(52px, 8vw, 104px) clamp(20px, 5vw, 64px); display: flex; justify-content: center">
+    <div style="width: min(100%, 470px); background: #FFFFFF; border-radius: 30px; padding: clamp(28px, 4vw, 44px); box-shadow: 0 18px 50px rgba(87,69,61,0.12); text-align: center; position: relative">
+      <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: #F3C3CD; color: #5A3A44; border-radius: 999px; padding: 6px 18px; font-family: Space Mono, monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap">One happy plan</div>
+      <h2 style="font-family: Fredoka, sans-serif; font-weight: 500; font-size: 27px; margin: 14px 0 4px; color: #4A392F">The Little Envelope</h2>
+      <p style="font-size: 16px; color: #7C6558; margin: 0 0 22px">Mailed the first week of every month.</p>
+      <div style="display: flex; align-items: baseline; justify-content: center; gap: 7px; margin-bottom: 8px">
+        <span style="font-family: Fredoka, sans-serif; font-weight: 500; font-size: clamp(50px, 9vw, 66px); letter-spacing: -0.02em; line-height: 1; color: #4A392F">{{ price }}</span>
+        <span style="font-size: 18px; color: #7C6558">/ month</span>
+      </div>
+      <p style="font-family: Space Mono, monospace; font-size: 12px; color: #A04A62; margin: 0 0 26px">{{ annualNote }}</p>
+      <ul style="list-style: none; margin: 0 0 28px; padding: 0; display: flex; flex-direction: column; gap: 12px; text-align: left">
+        <sc-for list="{{ perks }}" as="perk" hint-placeholder-count="4">
+          <li style="display: flex; align-items: flex-start; gap: 11px; font-size: 16px; line-height: 1.45; color: #57453D">
+            <span style="flex: none; width: 16px; height: 16px; border-radius: 999px; background: #C8D9BC; margin-top: 3px"></span>
+            <span>{{ perk }}</span>
+          </li>
+        </sc-for>
+      </ul>
+      <a href="#join" style="display: block; font-family: Fredoka, sans-serif; font-weight: 500; font-size: 17px; padding: 16px; border-radius: 999px; background: #C2647C; color: #FFFFFF; box-shadow: 0 6px 18px rgba(194,100,124,0.3); transition: transform .15s ease" style-hover="transform: translateY(-2px); text-decoration: none; color: #FFFFFF">Get on the list</a>
+      <p style="font-family: Space Mono, monospace; font-size: 11px; color: #75614F; margin: 15px 0 0">Cancel anytime. Keep the stickers.</p>
+    </div>
+  </section>
+
+  <section id="join" style="background: #F3E1E5">
+    <div style="max-width: 720px; margin: 0 auto; padding: clamp(52px, 8vw, 108px) clamp(20px, 5vw, 64px); text-align: center">
+      <h2 style="font-family: Fredoka, sans-serif; font-weight: 500; font-size: clamp(28px, 4.6vw, 48px); letter-spacing: -0.02em; margin: 0 0 16px; text-wrap: balance; color: #4A392F">Something tiny is on its way</h2>
+      <p style="font-size: 18px; line-height: 1.6; margin: 0 0 30px; color: #6B584E">Join the waitlist and we'll write to you first.</p>
+      <form sc-camel-on-submit="{{ onSubmit }}" style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-width: 490px; margin: 0 auto">
+        <input type="email" required="" placeholder="you@yourmailbox.com" value="{{ email }}" sc-camel-on-change="{{ onEmail }}" style="flex: 1 1 220px; min-width: 0; font-family: Nunito, sans-serif; font-size: 16px; padding: 16px 22px; border-radius: 999px; border: 1.5px solid #E5CDD3; background: #FFFFFF; color: #57453D; outline: none" style-focus="border-color: #C2647C">
+        <button type="submit" style="font-family: Fredoka, sans-serif; font-weight: 500; font-size: 16px; padding: 16px 30px; border-radius: 999px; border: none; background: #57453D; color: #FBF5E7; cursor: pointer; white-space: nowrap; transition: transform .15s ease" style-hover="transform: translateY(-2px)">Join the waitlist</button>
+      </form>
+      <p style="font-family: Space Mono, monospace; font-size: 12px; color: #75614F; margin: 14px 0 0">{{ formNote }}</p>
+    </div>
+  </section>
+
+  <footer style="background: #FBF5E7; padding: 30px clamp(20px, 5vw, 64px); display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; font-family: Space Mono, monospace; font-size: 12px; color: #7C6558">
+    <span>Happy Little Mail — made small, sent with love.</span>
+    <span>hello@happylittlemail.com</span>
   </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{&quot;price&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;$15&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;annualNote&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Go annual and one month is on us.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;cardCount&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:4,&quot;min&quot;:3,&quot;max&quot;:4,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;What's inside&quot;}}">
+class Component extends DCLogic {
+  state = { email: "", joined: false };
+  renderVals() {
+    const p = this.props;
+    return {
+      email: this.state.email,
+      price: p.price ?? "$15",
+      annualNote: p.annualNote ?? "Go annual and one month is on us.",
+      formNote: this.state.joined
+        ? "Yay! You're on the list. Watch your mailbox."
+        : "No spam, just tiny mail news.",
+      onEmail: (e) => this.setState({ email: e.target.value }),
+      onSubmit: (e) => { e.preventDefault(); this.setState({ joined: true }); },
+      items: [
+        { pos: "14% 64%", title: "Kawaii stickers", body: "Little bunnies, chicks and hearts, too cute to actually use." },
+        { pos: "62% 22%", title: "Mini pop-up card", body: "It unfolds into a whole tiny garden. Yes, really." },
+        { pos: "44% 50%", title: "A tiny letter", body: "A short, warm note. Something kind to read twice." },
+        { pos: "80% 70%", title: "A little charm", body: "A pocket-sized keepsake — a clover, a flower, a tiny gold heart." }
+      ].slice(0, p.cardCount ?? 4),
+      steps: [
+        { n: "1", title: "Subscribe", body: "Choose monthly or annual. It takes about a minute." },
+        { n: "2", title: "We curate", body: "We gather a little bundle of lovely things and pack it by hand." },
+        { n: "3", title: "It lands in your mailbox", body: "Flat, stamped, and smiling. Open it right there on the porch." }
+      ],
+      perks: [
+        "4–6 tiny things, hand-packed",
+        "A handwritten note every month",
+        "Free shipping, Forever stamp and all",
+        "Skip or cancel whenever"
+      ]
+    };
+  }
+}
+</script>
 
-  <script>
-    (function () {
-      var toast = document.getElementById("toast");
-      var loveBtn = document.getElementById("love-btn");
-      var shareBtn = document.getElementById("share-btn");
 
-      function say(message) {
-        toast.textContent = message;
-      }
-
-      loveBtn.addEventListener("click", function () {
-        say("That means a lot. Thank you.");
-        loveBtn.textContent = "Loved";
-      });
-
-      shareBtn.addEventListener("click", async function () {
-        var shareData = {
-          title: "Happy Little Mail",
-          text: "Tiny mail, big joy. A little envelope of joy, every month.",
-          url: window.location.href
-        };
-
-        try {
-          if (navigator.share) {
-            await navigator.share(shareData);
-            say("Shared. You are a good friend.");
-            return;
-          }
-        } catch (err) {
-          if (err && err.name === "AbortError") return;
-        }
-
-        try {
-          await navigator.clipboard.writeText(window.location.href);
-          say("Link copied. Send it to a friend.");
-        } catch (err) {
-          say("Copy this page’s link and send it along.");
-        }
-      });
-    })();
-  </script>
-</body>
-</html>
+</body></html>
