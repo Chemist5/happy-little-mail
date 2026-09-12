@@ -15,24 +15,22 @@
   <style>
     :root {
       --cream: #FFF8F2;
-      --cream-deep: #F6EBE0;
+      --cream-deep: #F3E4D4;
       --blush: #F2C4BE;
-      --blush-deep: #E39A92;
-      --blush-soft: #FBECEA;
+      --blush-deep: #D98980;
+      --blush-soft: #F8DED9;
       --gold: #C9A36A;
+      --gold-deep: #B0894A;
       --gold-soft: #E8D4A8;
       --sage: #8FA888;
-      --sage-deep: #6E8B68;
+      --sage-deep: #5F7A58;
       --ink: #4A4036;
       --ink-soft: #6B5F54;
       --paper: #FFFCFA;
-      --line: rgba(201, 163, 106, 0.35);
-      --shadow: 0 18px 50px rgba(90, 58, 46, 0.08);
-      --radius: 28px;
+      --shadow: 0 16px 40px rgba(90, 58, 46, 0.1);
     }
 
     * { box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -51,29 +49,20 @@
       pointer-events: none;
       z-index: 0;
       background:
-        radial-gradient(900px 520px at 8% -10%, rgba(242, 196, 190, 0.45), transparent 60%),
-        radial-gradient(720px 480px at 100% 8%, rgba(201, 163, 106, 0.18), transparent 55%),
-        radial-gradient(640px 420px at 90% 90%, rgba(143, 168, 136, 0.16), transparent 60%);
-    }
-
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0.22;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Ccircle cx='8' cy='12' r='0.8' fill='%23C9A36A'/%3E%3Ccircle cx='92' cy='48' r='0.7' fill='%23E39A92'/%3E%3Ccircle cx='48' cy='110' r='0.7' fill='%238FA888'/%3E%3C/svg%3E");
+        radial-gradient(720px 460px at 0% 0%, rgba(242, 196, 190, 0.55), transparent 62%),
+        radial-gradient(560px 380px at 100% 4%, rgba(201, 163, 106, 0.28), transparent 58%),
+        radial-gradient(640px 420px at 88% 100%, rgba(143, 168, 136, 0.22), transparent 60%);
     }
 
     header, main, footer { position: relative; z-index: 1; }
 
     .wrap {
-      width: min(1080px, calc(100% - 2.2rem));
+      width: min(1040px, calc(100% - 2rem));
       margin: 0 auto;
     }
 
     header {
-      padding: 1.35rem 0 0.4rem;
+      padding: 1.1rem 0 0;
     }
 
     .brand {
@@ -85,28 +74,33 @@
     }
 
     .brand-mark {
-      width: 42px;
-      height: 42px;
+      width: 46px;
+      height: 46px;
       flex: none;
     }
 
     .brand-name {
       font-family: "Fredoka", sans-serif;
       font-weight: 600;
-      font-size: 1.15rem;
-      letter-spacing: 0.01em;
+      font-size: 1.12rem;
     }
 
     .brand-tag {
       display: block;
       font-size: 0.78rem;
-      color: var(--ink-soft);
-      margin-top: -0.15rem;
+      color: var(--sage-deep);
+      margin-top: -0.12rem;
+      font-weight: 700;
     }
 
     .hero {
-      padding: 3.2rem 0 2.4rem;
-      text-align: center;
+      padding: 2.4rem 0 1.4rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: 2rem;
+      align-items: center;
     }
 
     h1, h2, h3 {
@@ -117,172 +111,161 @@
     }
 
     h1 {
-      font-size: clamp(2.4rem, 8vw, 4.4rem);
-      margin: 0 0 0.75rem;
+      font-size: clamp(2.35rem, 9vw, 4.1rem);
+      margin: 0 0 0.7rem;
     }
 
     .lede {
-      margin: 0 auto 2.4rem;
-      max-width: 28ch;
-      font-size: clamp(1.15rem, 3vw, 1.4rem);
+      margin: 0 0 1.15rem;
+      max-width: 22ch;
+      font-size: clamp(1.12rem, 3.2vw, 1.38rem);
       color: var(--ink-soft);
-      font-weight: 500;
+      font-weight: 600;
     }
 
-    .product-shot {
-      margin: 0 auto;
-      max-width: 440px;
+    .pill {
+      display: inline-block;
+      background: var(--blush-soft);
+      color: #7A4540;
+      border-radius: 999px;
+      padding: 0.28rem 0.75rem;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.9rem;
     }
+
+    .product-shot { margin: 0; }
 
     .product-shot img {
       display: block;
       width: 100%;
       height: auto;
-      border-radius: 24px;
-      box-shadow: var(--shadow);
+      border-radius: 22px;
     }
 
     .photo-placeholder {
-      aspect-ratio: 4 / 5;
-      border: 2px dashed var(--gold);
-      border-radius: 24px;
+      aspect-ratio: 4 / 3;
+      border: 2.5px dashed var(--gold-deep);
+      border-radius: 22px;
       background:
-        linear-gradient(180deg, rgba(255, 252, 250, 0.7), rgba(251, 236, 234, 0.85));
+        repeating-linear-gradient(
+          -12deg,
+          rgba(232, 212, 168, 0.18) 0 10px,
+          transparent 10px 20px
+        ),
+        linear-gradient(180deg, #FFFDF9, var(--blush-soft));
       display: grid;
       place-items: center;
-      padding: 1.5rem;
+      padding: 1.25rem;
       box-shadow: var(--shadow);
     }
 
-    .photo-placeholder-inner {
-      text-align: center;
-      color: var(--ink-soft);
-    }
+    .photo-placeholder-inner { text-align: center; color: var(--ink-soft); }
 
-    .photo-placeholder svg {
-      width: 54px;
-      height: 54px;
-      margin-bottom: 0.85rem;
+    .frame-icon {
+      width: 72px;
+      height: 56px;
+      margin: 0 auto 0.7rem;
     }
 
     .photo-placeholder p {
       margin: 0;
       font-family: "Fredoka", sans-serif;
-      font-size: 1.15rem;
+      font-size: 1.2rem;
       color: var(--ink);
     }
 
     .photo-placeholder small {
       display: block;
-      margin-top: 0.4rem;
+      margin-top: 0.35rem;
       font-size: 0.85rem;
     }
 
-    section {
-      padding: 3.4rem 0;
-    }
+    section { padding: 3rem 0; }
 
     .section-kicker {
       display: inline-block;
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--sage-deep);
-      font-weight: 700;
-      margin-bottom: 0.7rem;
+      font-weight: 800;
+      margin-bottom: 0.55rem;
     }
 
     h2 {
-      font-size: clamp(1.8rem, 4vw, 2.4rem);
-      margin: 0 0 1rem;
+      font-size: clamp(1.7rem, 4.4vw, 2.3rem);
+      margin: 0 0 0.9rem;
     }
 
-    .intro {
-      max-width: 40rem;
-    }
+    .intro { max-width: 38rem; }
 
     .intro p {
-      margin: 0 0 1rem;
-      font-size: 1.12rem;
+      margin: 0 0 0.9rem;
+      font-size: 1.1rem;
     }
 
-    .cards {
+    .cards, .steps {
       display: grid;
-      gap: 1rem;
-      margin-top: 1.8rem;
+      gap: 0.9rem;
+      margin-top: 1.5rem;
     }
 
-    .card {
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 1.4rem 1.35rem 1.5rem;
-      box-shadow: 0 8px 24px rgba(90, 58, 46, 0.04);
+    .card, .step {
+      border-radius: 24px;
+      padding: 1.3rem 1.25rem 1.4rem;
+      box-shadow: 0 8px 22px rgba(90, 58, 46, 0.05);
     }
+
+    .card:nth-child(1) { background: #FBECEA; }
+    .card:nth-child(2) { background: #FFF6E8; }
+    .card:nth-child(3) { background: #F3F6EE; }
+    .card:nth-child(4) { background: #F8E8E4; }
+    .step { background: var(--paper); border: 1px solid rgba(201, 163, 106, 0.28); }
 
     .card-icon {
-      width: 48px;
-      height: 48px;
-      margin-bottom: 0.85rem;
+      width: 52px;
+      height: 52px;
+      margin-bottom: 0.7rem;
     }
 
-    .card h3 {
-      margin: 0 0 0.45rem;
-      font-size: 1.25rem;
+    .card h3, .step h3 {
+      margin: 0 0 0.4rem;
+      font-size: 1.22rem;
     }
 
-    .card p {
+    .card p, .step p {
       margin: 0;
       color: var(--ink-soft);
-    }
-
-    .steps {
-      display: grid;
-      gap: 1rem;
-      margin-top: 1.8rem;
-    }
-
-    .step {
-      background: var(--paper);
-      border-radius: var(--radius);
-      padding: 1.45rem 1.4rem 1.55rem;
-      border: 1px solid rgba(143, 168, 136, 0.28);
     }
 
     .step-num {
-      width: 36px;
-      height: 36px;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
       display: grid;
       place-items: center;
-      background: var(--blush-soft);
-      color: var(--blush-deep);
       font-family: "Fredoka", sans-serif;
       font-weight: 600;
-      margin-bottom: 0.85rem;
+      margin-bottom: 0.75rem;
+      color: #fff;
     }
 
-    .step h3 {
-      margin: 0 0 0.4rem;
-      font-size: 1.25rem;
-    }
+    .step:nth-child(1) .step-num { background: var(--blush-deep); }
+    .step:nth-child(2) .step-num { background: var(--gold-deep); }
+    .step:nth-child(3) .step-num { background: var(--sage-deep); }
 
-    .step p {
-      margin: 0;
-      color: var(--ink-soft);
-    }
-
-    .pricing {
-      text-align: center;
-    }
+    .pricing { text-align: center; }
 
     .price-card {
-      margin: 1.8rem auto 0;
-      max-width: 420px;
+      margin: 1.5rem auto 0;
+      max-width: 400px;
       background: var(--paper);
-      border-radius: 32px;
-      padding: 2.2rem 1.6rem 2rem;
-      border: 1px solid var(--gold-soft);
+      border-radius: 28px;
+      padding: 2.3rem 1.45rem 1.85rem;
+      border: 1.5px solid var(--gold-soft);
       box-shadow: var(--shadow);
       position: relative;
     }
@@ -291,45 +274,46 @@
       content: "";
       position: absolute;
       top: 0;
-      left: 12%;
-      right: 12%;
-      height: 10px;
-      background: linear-gradient(90deg, var(--blush), var(--gold-soft), var(--sage));
-      border-radius: 0 0 12px 12px;
+      left: 10%;
+      right: 10%;
+      height: 12px;
+      background: linear-gradient(90deg, var(--blush-deep), var(--gold), var(--sage));
+      border-radius: 0 0 14px 14px;
     }
 
     .plan-name {
-      margin: 0.6rem 0 0.35rem;
-      font-size: 1.7rem;
+      margin: 0.45rem 0 0.3rem;
+      font-size: 1.65rem;
     }
 
     .price {
       font-family: "Fredoka", sans-serif;
       font-size: 3rem;
       line-height: 1;
-      margin: 0.4rem 0 0.15rem;
+      margin: 0.35rem 0 0.2rem;
     }
 
     .price span {
       font-size: 1.05rem;
       color: var(--ink-soft);
       font-family: "Nunito", sans-serif;
-      font-weight: 600;
+      font-weight: 700;
     }
 
     .price-note {
-      margin: 1rem 0 0;
-      color: var(--ink-soft);
+      margin: 0.9rem 0 0;
+      color: var(--sage-deep);
+      font-weight: 700;
     }
 
     .cta {
       text-align: center;
-      padding-bottom: 4.2rem;
+      padding-bottom: 3.6rem;
     }
 
     .cta p {
-      max-width: 34rem;
-      margin: 0 auto 1.6rem;
+      max-width: 32rem;
+      margin: 0 auto 1.4rem;
       color: var(--ink-soft);
     }
 
@@ -337,18 +321,18 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 0.75rem;
+      gap: 0.7rem;
     }
 
     button {
       font-family: inherit;
       font-size: 1rem;
-      font-weight: 700;
+      font-weight: 800;
       border: 0;
       cursor: pointer;
       border-radius: 999px;
-      padding: 0.9rem 1.35rem;
-      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+      padding: 0.9rem 1.3rem;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
     }
 
     button:focus-visible {
@@ -357,28 +341,28 @@
     }
 
     .btn-love {
-      background: #E8A39B;
-      color: #4A2E2A;
-      box-shadow: 0 8px 20px rgba(227, 154, 146, 0.28);
+      background: var(--blush-deep);
+      color: #fff;
+      box-shadow: 0 8px 18px rgba(217, 137, 128, 0.32);
     }
 
     .btn-share {
       background: var(--paper);
       color: var(--ink);
-      border: 1.5px solid var(--gold);
+      border: 1.5px solid var(--gold-deep);
     }
 
     button:hover { transform: translateY(-1px); }
 
     .toast {
-      min-height: 1.5rem;
-      margin-top: 1rem;
+      min-height: 1.4rem;
+      margin-top: 0.95rem;
       color: var(--sage-deep);
-      font-weight: 600;
+      font-weight: 700;
     }
 
     footer {
-      padding: 0 0 2.4rem;
+      padding: 0 0 2.2rem;
       text-align: center;
       color: var(--ink-soft);
       font-size: 0.92rem;
@@ -391,15 +375,19 @@
     }
 
     @media (min-width: 720px) {
-      .cards { grid-template-columns: repeat(2, 1fr); gap: 1.15rem; }
-      .steps { grid-template-columns: repeat(3, 1fr); gap: 1.15rem; }
-      section { padding: 4.2rem 0; }
-      .hero { padding: 4.4rem 0 2.8rem; }
+      .hero { padding: 3.4rem 0 1.6rem; }
+      .hero-grid {
+        grid-template-columns: 1fr 0.92fr;
+        gap: 3rem;
+      }
+      .photo-placeholder { aspect-ratio: 4 / 5; }
+      .cards { grid-template-columns: repeat(2, 1fr); }
+      .steps { grid-template-columns: repeat(3, 1fr); }
+      section { padding: 3.6rem 0; }
     }
 
     @media (min-width: 980px) {
       .cards { grid-template-columns: repeat(4, 1fr); }
-      .card, .step { padding: 1.55rem 1.4rem 1.65rem; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -413,11 +401,11 @@
     <div class="wrap">
       <a class="brand" href="#top">
         <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
-          <rect x="4" y="4" width="56" height="56" rx="16" fill="#FBECEA"/>
-          <rect x="12" y="20" width="40" height="26" rx="5" fill="#FFF8F2" stroke="#C9A36A" stroke-width="2"/>
-          <path d="M13 22.5 32 35l19-12.5" fill="none" stroke="#E39A92" stroke-width="2.2" stroke-linecap="round"/>
-          <circle cx="48" cy="18" r="7" fill="#8FA888"/>
-          <path d="M48 14.6v6.8M44.6 18h6.8" stroke="#FFF8F2" stroke-width="1.6" stroke-linecap="round"/>
+          <rect width="64" height="64" rx="18" fill="#F2C4BE"/>
+          <rect x="11" y="20" width="42" height="28" rx="6" fill="#FFF8F2"/>
+          <path d="M13 23l19 13 19-13" fill="none" stroke="#C9A36A" stroke-width="2.6" stroke-linecap="round"/>
+          <circle cx="50" cy="18" r="9" fill="#8FA888"/>
+          <path d="M50 13.8v8.4M45.8 18h8.4" stroke="#FFF8F2" stroke-width="2" stroke-linecap="round"/>
         </svg>
         <span>
           <span class="brand-name">Happy Little Mail</span>
@@ -429,9 +417,12 @@
 
   <main id="top">
     <section class="hero">
-      <div class="wrap">
-        <h1>Tiny mail, big joy</h1>
-        <p class="lede">A little envelope of joy, every month</p>
+      <div class="wrap hero-grid">
+        <div>
+          <p class="pill">Monthly tiny mail</p>
+          <h1>Tiny mail, big joy</h1>
+          <p class="lede">A little envelope of joy, every month</p>
+        </div>
         <figure class="product-shot" id="product-photo">
           <!--
             Jaime: replace the dashed .photo-placeholder below with your photo:
@@ -439,10 +430,10 @@
           -->
           <div class="photo-placeholder" role="img" aria-label="Your product photo here">
             <div class="photo-placeholder-inner">
-              <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
-                <rect x="8" y="12" width="48" height="40" rx="8" stroke="#C9A36A" stroke-width="2"/>
-                <circle cx="24" cy="28" r="5" stroke="#E39A92" stroke-width="2"/>
-                <path d="M10 44l13-12 9 8 7-6 15 14" stroke="#8FA888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <svg class="frame-icon" viewBox="0 0 72 56" fill="none" aria-hidden="true">
+                <rect x="2" y="8" width="68" height="42" rx="8" stroke="#B0894A" stroke-width="2.4" stroke-dasharray="5 4"/>
+                <path d="M8 16h56v26H8z" fill="#FFF8F2"/>
+                <path d="M10 18l26 16 26-16" stroke="#D98980" stroke-width="2.2" stroke-linecap="round"/>
               </svg>
               <p>Your product photo here</p>
               <small>A small envelope, softly lit, on cream paper</small>
@@ -469,36 +460,36 @@
         <div class="cards">
           <article class="card">
             <svg class="card-icon" viewBox="0 0 64 64" aria-hidden="true">
-              <rect x="8" y="10" width="34" height="34" rx="8" fill="#FBECEA" stroke="#E39A92" stroke-width="2"/>
-              <path d="M19 27h12M25 21v12" stroke="#E39A92" stroke-width="2.2" stroke-linecap="round"/>
-              <rect x="24" y="24" width="32" height="30" rx="8" fill="#FFF8F2" stroke="#C9A36A" stroke-width="2"/>
-              <circle cx="36" cy="38" r="4" fill="#8FA888"/>
-              <circle cx="46" cy="38" r="4" fill="#E39A92"/>
+              <rect x="6" y="8" width="32" height="32" rx="8" fill="#D98980"/>
+              <path d="M16 24h12M22 18v12" stroke="#FFF8F2" stroke-width="2.6" stroke-linecap="round"/>
+              <rect x="24" y="24" width="34" height="32" rx="8" fill="#FFF8F2" stroke="#C9A36A" stroke-width="2.2"/>
+              <circle cx="36" cy="40" r="5" fill="#8FA888"/>
+              <circle cx="48" cy="40" r="5" fill="#D98980"/>
             </svg>
             <h3>Kawaii stickers</h3>
             <p>Tiny characters and sweet little sheets for journals, letters, and laptop corners.</p>
           </article>
           <article class="card">
             <svg class="card-icon" viewBox="0 0 64 64" aria-hidden="true">
-              <rect x="14" y="12" width="36" height="42" rx="6" fill="#FFF8F2" stroke="#C9A36A" stroke-width="2"/>
-              <path d="M22 24h20M22 32h16M22 40h12" stroke="#8FA888" stroke-width="2" stroke-linecap="round"/>
+              <rect x="14" y="8" width="36" height="48" rx="7" fill="#FFF8F2" stroke="#B0894A" stroke-width="2.4"/>
+              <path d="M24 22h16M24 31h14M24 40h10" stroke="#8FA888" stroke-width="2.4" stroke-linecap="round"/>
             </svg>
             <h3>Mini stationery</h3>
             <p>Miniature notes and cards, just the right size for a kind word.</p>
           </article>
           <article class="card">
             <svg class="card-icon" viewBox="0 0 64 64" aria-hidden="true">
-              <rect x="8" y="22" width="48" height="16" rx="4" fill="#FBECEA" stroke="#E39A92" stroke-width="2" transform="rotate(-8 32 30)"/>
-              <path d="M14 28h8M26 26h8M38 24h8" stroke="#C9A36A" stroke-width="2" stroke-linecap="round"/>
+              <rect x="6" y="24" width="52" height="16" rx="5" fill="#D98980" transform="rotate(-10 32 32)"/>
+              <rect x="8" y="26" width="48" height="6" rx="2" fill="#FFF8F2" transform="rotate(-10 32 29)" opacity="0.45"/>
             </svg>
             <h3>Flat washi samples</h3>
             <p>Soft patterns you can try without a bulky roll. Pretty, thin, and ready to use.</p>
           </article>
           <article class="card">
             <svg class="card-icon" viewBox="0 0 64 64" aria-hidden="true">
-              <path d="M12 44V22l20-8 20 8v22" fill="#FFF8F2" stroke="#8FA888" stroke-width="2" stroke-linejoin="round"/>
-              <path d="M12 22l20 10 20-10" fill="none" stroke="#C9A36A" stroke-width="2"/>
-              <circle cx="32" cy="34" r="3" fill="#E39A92"/>
+              <path d="M10 46V20l22-10 22 10v26" fill="#FFF8F2" stroke="#5F7A58" stroke-width="2.4" stroke-linejoin="round"/>
+              <path d="M10 20l22 12 22-12" fill="none" stroke="#C9A36A" stroke-width="2.4"/>
+              <circle cx="32" cy="36" r="4" fill="#D98980"/>
             </svg>
             <h3>A pop-up surprise</h3>
             <p>Now and then, a tiny pop-up card that still slips into the envelope.</p>
@@ -539,7 +530,7 @@
           <h3 class="plan-name">The Little Envelope</h3>
           <p class="price">$15 <span>/ month</span></p>
           <p>A standard envelope, stuffed with miniature joy.</p>
-          <p class="price-note">Pay yearly and the twelfth month is our treat.</p>
+          <p class="price-note">Yearly gets a month free.</p>
         </div>
       </div>
     </section>
@@ -562,8 +553,8 @@
     <div class="wrap">
       <p class="stamp">
         <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-          <rect x="3" y="5" width="18" height="14" rx="3" fill="none" stroke="#C9A36A" stroke-width="1.6"/>
-          <path d="M4 7l8 6 8-6" fill="none" stroke="#E39A92" stroke-width="1.6"/>
+          <rect x="3" y="5" width="18" height="14" rx="3" fill="none" stroke="#C9A36A" stroke-width="1.7"/>
+          <path d="M4 7l8 6 8-6" fill="none" stroke="#D98980" stroke-width="1.7"/>
         </svg>
         Happy Little Mail · tiny and joyful
       </p>
