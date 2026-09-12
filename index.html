@@ -100,7 +100,7 @@
     .hero-grid {
       display: grid;
       gap: 2rem;
-      align-items: center;
+      align-items: start;
     }
 
     h1, h2, h3 {
@@ -377,10 +377,12 @@
     @media (min-width: 720px) {
       .hero { padding: 3.4rem 0 1.6rem; }
       .hero-grid {
-        grid-template-columns: 1fr 0.92fr;
-        gap: 3rem;
+        grid-template-columns: 1.05fr 0.9fr;
+        gap: 3.2rem;
+        align-items: center;
       }
-      .photo-placeholder { aspect-ratio: 4 / 5; }
+      .hero-copy { padding-bottom: 0.4rem; }
+      .photo-placeholder { aspect-ratio: 1 / 1; }
       .cards { grid-template-columns: repeat(2, 1fr); }
       .steps { grid-template-columns: repeat(3, 1fr); }
       section { padding: 3.6rem 0; }
@@ -418,7 +420,7 @@
   <main id="top">
     <section class="hero">
       <div class="wrap hero-grid">
-        <div>
+        <div class="hero-copy">
           <p class="pill">Monthly tiny mail</p>
           <h1>Tiny mail, big joy</h1>
           <p class="lede">A little envelope of joy, every month</p>
