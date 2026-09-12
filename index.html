@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Happy Little Mail</title>
+  <meta name="description" content="Tiny mail, big joy. A little envelope of joy, every month.">
+  <meta name="theme-color" content="#FFF8F2">
+  <meta property="og:title" content="Happy Little Mail">
+  <meta property="og:description" content="Tiny mail, big joy. A little envelope of joy, every month.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #FFF8F2;
+      --cream-deep: #F6EBE0;
+      --blush: #F2C4BE;
+      --blush-deep: #E39A92;
+      --blush-soft: #FBECEA;
+      --gold: #C9A36A;
+      --gold-soft: #E8D4A8;
+      --sage: #8FA888;
+      --sage-deep: #6E8B68;
+      --ink: #4A4036;
+      --ink-soft: #6B5F54;
+      --paper: #FFFCFA;
+      --line: rgba(201, 163, 106, 0.35);
+      --shadow: 0 18px 50px rgba(90, 58, 46, 0.08);
+      --radius: 28px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: "Nunito", system-ui, sans-serif;
+      color: var(--ink);
+      background: var(--cream);
+      line-height: 1.65;
+      font-size: 1.05rem;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(900px 520px at 8% -10%, rgba(242, 196, 190, 0.45), transparent 60%),
+        radial-gradient(720px 480px at 100% 8%, rgba(201, 163, 106, 0.18), transparent 55%),
+        radial-gradient(640px 420px at 90% 90%, rgba(143, 168, 136, 0.16), transparent 60%);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.22;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Ccircle cx='8' cy='12' r='0.8' fill='%23C9A36A'/%3E%3Ccircle cx='92' cy='48' r='0.7' fill='%23E39A92'/%3E%3Ccircle cx='48' cy='110' r='0.7' fill='%238FA888'/%3E%3C/svg%3E");
+    }
+
+    header, main, footer { position: relative; z-index: 1; }
+
+    .wrap {
+      width: min(1080px, calc(100% - 2.2rem));
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 1.35rem 0 0.4rem;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      flex: none;
+    }
+
+    .brand-name {
+      font-family: "Fredoka", sans-serif;
+      font-weight: 600;
+      font-size: 1.15rem;
+      letter-spacing: 0.01em;
+    }
+
+    .brand-tag {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--ink-soft);
+      margin-top: -0.15rem;
+    }
+
+    .hero {
+      padding: 3.2rem 0 2.4rem;
+      text-align: center;
+    }
+
+    h1, h2, h3 {
+      font-family: "Fredoka", sans-serif;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 8vw, 4.4rem);
+      margin: 0 0 0.75rem;
+    }
+
+    .lede {
+      margin: 0 auto 2.4rem;
+      max-width: 28ch;
+      font-size: clamp(1.15rem, 3vw, 1.4rem);
+      color: var(--ink-soft);
+      font-weight: 500;
+    }
+
+    .product-shot {
+      margin: 0 auto;
+      max-width: 440px;
+    }
+
+    .product-shot img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .photo-placeholder {
+      aspect-ratio: 4 / 5;
+      border: 2px dashed var(--gold);
+      border-radius: 24px;
+      background:
+        linear-gradient(180deg, rgba(255, 252, 250, 0.7), rgba(251, 236, 234, 0.85));
+      display: grid;
+      place-items: center;
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    .photo-placeholder-inner {
+      text-align: center;
+      color: var(--ink-soft);
+    }
+
+    .photo-placeholder svg {
+      width: 54px;
+      height: 54px;
+      margin-bottom: 0.85rem;
+    }
+
+    .photo-placeholder p {
+      margin: 0;
+      font-family: "Fredoka", sans-serif;
+      font-size: 1.15rem;
+      color: var(--ink);
+    }
+
+    .photo-placeholder small {
+      display: block;
+      margin-top: 0.4rem;
+      font-size: 0.85rem;
+    }
+
+    section {
+      padding: 3.4rem 0;
+    }
+
+    .section-kicker {
+      display: inline-block;
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--sage-deep);
+      font-weight: 700;
+      margin-bottom: 0.7rem;
+    }
+
+    h2 {
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      margin: 0 0 1rem;
+    }
+
+    .intro {
+      max-width: 40rem;
+    }
+
+    .intro p {
+      margin: 0 0 1rem;
+      font-size: 1.12rem;
+    }
+
+    .cards {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1.8rem;
+    }
+
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.4rem 1.35rem 1.5rem;
+      box-shadow: 0 8px 24px rgba(90, 58, 46, 0.04);
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 0.85rem;
+    }
+
+    .card h3 {
+      margin: 0 0 0.45rem;
+      font-size: 1.25rem;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--ink-soft);
+    }
+
+    .steps {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1.8rem;
+    }
+
+    .step {
+      background: var(--paper);
+      border-radius: var(--radius);
+      padding: 1.45rem 1.4rem 1.55rem;
+      border: 1px solid rgba(143, 168, 136, 0.28);
+    }
+
+    .step-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--blush-soft);
+      color: var(--blush-deep);
+      font-family: "Fredoka", sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.85rem;
+    }
+
+    .step h3 {
+      margin: 0 0 0.4rem;
+      font-size: 1.25rem;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--ink-soft);
+    }
+
+    .pricing {
+      text-align: center;
+    }
+
+    .price-card {
+      margin: 1.8rem auto 0;
+      max-width: 420px;
+      background: var(--paper);
+      border-radius: 32px;
+      padding: 2.2rem 1.6rem 2rem;
+      border: 1px solid var(--gold-soft);
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .price-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 12%;
+      right: 12%;
+      height: 10px;
+      background: linear-gradient(90deg, var(--blush), var(--gold-soft), var(--sage));
+      border-radius: 0 0 12px 12px;
+    }
+
+    .plan-name {
+      margin: 0.6rem 0 0.35rem;
+      font-size: 1.7rem;
+    }
+
+    .price {
+      font-family: "Fredoka", sans-serif;
+      font-size: 3rem;
+      line-height: 1;
+      margin: 0.4rem 0 0.15rem;
+    }
+
+    .price span {
+      font-size: 1.05rem;
+      color: var(--ink-soft);
+      font-family: "Nunito", sans-serif;
+      font-weight: 600;
+    }
+
+    .price-note {
+      margin: 1rem 0 0;
+      color: var(--ink-soft);
+    }
+
+    .cta {
+      text-align: center;
+      padding-bottom: 4.2rem;
+    }
+
+    .cta p {
+      max-width: 34rem;
+      margin: 0 auto 1.6rem;
+      color: var(--ink-soft);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+
+    button {
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      border: 0;
+      cursor: pointer;
+      border-radius: 999px;
+      padding: 0.9rem 1.35rem;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    button:focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: 3px;
+    }
+
+    .btn-love {
+      background: #E8A39B;
+      color: #4A2E2A;
+      box-shadow: 0 8px 20px rgba(227, 154, 146, 0.28);
+    }
+
+    .btn-share {
+      background: var(--paper);
+      color: var(--ink);
+      border: 1.5px solid var(--gold);
+    }
+
+    button:hover { transform: translateY(-1px); }
+
+    .toast {
+      min-height: 1.5rem;
+      margin-top: 1rem;
+      color: var(--sage-deep);
+      font-weight: 600;
+    }
+
+    footer {
+      padding: 0 0 2.4rem;
+      text-align: center;
+      color: var(--ink-soft);
+      font-size: 0.92rem;
+    }
+
+    .stamp {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    @media (min-width: 720px) {
+      .cards { grid-template-columns: repeat(2, 1fr); gap: 1.15rem; }
+      .steps { grid-template-columns: repeat(3, 1fr); gap: 1.15rem; }
+      section { padding: 4.2rem 0; }
+      .hero { padding: 4.4rem 0 2.8rem; }
+    }
+
+    @media (min-width: 980px) {
+      .cards { grid-template-columns: repeat(4, 1fr); }
+      .card, .step { padding: 1.55rem 1.4rem 1.65rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      button { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <a class="brand" href="#top">
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+          <rect x="4" y="4" width="56" height="56" rx="16" fill="#FBECEA"/>
+          <rect x="12" y="20" width="40" height="26" rx="5" fill="#FFF8F2" stroke="#C9A36A" stroke-width="2"/>
+          <path d="M13 22.5 32 35l19-12.5" fill="none" stroke="#E39A92" stroke-width="2.2" stroke-linecap="round"/>
+          <circle cx="48" cy="18" r="7" fill="#8FA888"/>
+          <path d="M48 14.6v6.8M44.6 18h6.8" stroke="#FFF8F2" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <span>
+          <span class="brand-name">Happy Little Mail</span>
+          <span class="brand-tag">tiny and joyful</span>
+        </span>
+      </a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap">
+        <h1>Tiny mail, big joy</h1>
+        <p class="lede">A little envelope of joy, every month</p>
+        <figure class="product-shot" id="product-photo">
+          <!--
+            Jaime: replace the dashed .photo-placeholder below with your photo:
+            <img src="product.jpg" alt="A Happy Little Mail envelope filled with tiny stationery">
+          -->
+          <div class="photo-placeholder" role="img" aria-label="Your product photo here">
+            <div class="photo-placeholder-inner">
+              <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
+                <rect x="8" y="12" width="48" height="40" rx="8" stroke="#C9A36A" stroke-width="2"/>
+                <circle cx="24" cy="28" r="5" stroke="#E39A92" stroke-width="2"/>
+                <path d="M10 44l13-12 9 8 7-6 15 14" stroke="#8FA888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <p>Your product photo here</p>
+              <small>A small envelope, softly lit, on cream paper</small>
+            </div>
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <section id="what">
+      <div class="wrap intro">
+        <span class="section-kicker">What it is</span>
+        <h2>A pocket-size gift, sent through the mail</h2>
+        <p>Once a month, a small standard envelope arrives with a Forever stamp and a handful of tiny, delightful things. Think kawaii stickers, miniature stationery, flat washi samples, and a short handwritten letter.</p>
+        <p>Everything stays flat and light on purpose. The joy is in how small it feels, like a secret that still fits in your mailbox.</p>
+        <p>It is mail you can hold in one hand, made for people who love little treasures.</p>
+      </div>
+    </section>
+
+    <section id="inside">
+      <div class="wrap">
+        <span class="section-kicker">What’s inside</span>
+        <h2>Four tiny kinds of delight</h2>
+        <div class="cards">
+          <article class="card">
+            <svg class="card-icon" viewBox="0 0 64 64" aria-hidden="true">
+              <rect x="8" y="10" width="34" height="34" rx="8" fill="#FBECEA" stroke="#E39A92" stroke-width="2"/>
+              <path d="M19 27h12M25 21v12" stroke="#E39A92" stroke-width="2.2" stroke-linecap="round"/>
+              <rect x="24" y="24" width="32" height="30" rx="8" fill="#FFF8F2" stroke="#C9A36A" stroke-width="2"/>
+              <circle cx="36" cy="38" r="4" fill="#8FA888"/>
+              <circle cx="46" cy="38" r="4" fill="#E39A92"/>
+            </svg>
+            <h3>Kawaii stickers</h3>
+            <p>Tiny characters and sweet little sheets for journals, letters, and laptop corners.</p>
+          </article>
+          <article class="card">
+            <svg class="card-icon" viewBox="0 0 64 64" aria-hidden="true">
+              <rect x="14" y="12" width="36" height="42" rx="6" fill="#FFF8F2" stroke="#C9A36A" stroke-width="2"/>
+              <path d="M22 24h20M22 32h16M22 40h12" stroke="#8FA888" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <h3>Mini stationery</h3>
+            <p>Miniature notes and cards, just the right size for a kind word.</p>
+          </article>
+          <article class="card">
+            <svg class="card-icon" viewBox="0 0 64 64" aria-hidden="true">
+              <rect x="8" y="22" width="48" height="16" rx="4" fill="#FBECEA" stroke="#E39A92" stroke-width="2" transform="rotate(-8 32 30)"/>
+              <path d="M14 28h8M26 26h8M38 24h8" stroke="#C9A36A" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <h3>Flat washi samples</h3>
+            <p>Soft patterns you can try without a bulky roll. Pretty, thin, and ready to use.</p>
+          </article>
+          <article class="card">
+            <svg class="card-icon" viewBox="0 0 64 64" aria-hidden="true">
+              <path d="M12 44V22l20-8 20 8v22" fill="#FFF8F2" stroke="#8FA888" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M12 22l20 10 20-10" fill="none" stroke="#C9A36A" stroke-width="2"/>
+              <circle cx="32" cy="34" r="3" fill="#E39A92"/>
+            </svg>
+            <h3>A pop-up surprise</h3>
+            <p>Now and then, a tiny pop-up card that still slips into the envelope.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="how">
+      <div class="wrap">
+        <span class="section-kicker">How it works</span>
+        <h2>Three gentle steps</h2>
+        <div class="steps">
+          <article class="step">
+            <div class="step-num">1</div>
+            <h3>Subscribe</h3>
+            <p>Choose The Little Envelope. One simple plan, once a month.</p>
+          </article>
+          <article class="step">
+            <div class="step-num">2</div>
+            <h3>We curate</h3>
+            <p>Each month we gather a tiny, joyful mix that still mails cheaply.</p>
+          </article>
+          <article class="step">
+            <div class="step-num">3</div>
+            <h3>Check your mailbox</h3>
+            <p>A Forever-stamped envelope arrives, ready to open with a cup of tea.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="pricing" id="pricing">
+      <div class="wrap">
+        <span class="section-kicker">Pricing</span>
+        <h2>One little plan</h2>
+        <div class="price-card">
+          <h3 class="plan-name">The Little Envelope</h3>
+          <p class="price">$15 <span>/ month</span></p>
+          <p>A standard envelope, stuffed with miniature joy.</p>
+          <p class="price-note">Pay yearly and the twelfth month is our treat.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="share">
+      <div class="wrap">
+        <span class="section-kicker">Pass it on</span>
+        <h2>If this made you smile, share it</h2>
+        <p>This is a first look for friends, not a shop yet. If you would love a tiny envelope like this, let someone know.</p>
+        <div class="actions">
+          <button type="button" class="btn-love" id="love-btn">I’d love this</button>
+          <button type="button" class="btn-share" id="share-btn">Share with a friend</button>
+        </div>
+        <p class="toast" id="toast" aria-live="polite"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p class="stamp">
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="3" y="5" width="18" height="14" rx="3" fill="none" stroke="#C9A36A" stroke-width="1.6"/>
+          <path d="M4 7l8 6 8-6" fill="none" stroke="#E39A92" stroke-width="1.6"/>
+        </svg>
+        Happy Little Mail · tiny and joyful
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var toast = document.getElementById("toast");
+      var loveBtn = document.getElementById("love-btn");
+      var shareBtn = document.getElementById("share-btn");
+
+      function say(message) {
+        toast.textContent = message;
+      }
+
+      loveBtn.addEventListener("click", function () {
+        say("That means a lot. Thank you.");
+        loveBtn.textContent = "Loved";
+      });
+
+      shareBtn.addEventListener("click", async function () {
+        var shareData = {
+          title: "Happy Little Mail",
+          text: "Tiny mail, big joy. A little envelope of joy, every month.",
+          url: window.location.href
+        };
+
+        try {
+          if (navigator.share) {
+            await navigator.share(shareData);
+            say("Shared. You are a good friend.");
+            return;
+          }
+        } catch (err) {
+          if (err && err.name === "AbortError") return;
+        }
+
+        try {
+          await navigator.clipboard.writeText(window.location.href);
+          say("Link copied. Send it to a friend.");
+        } catch (err) {
+          say("Copy this page’s link and send it along.");
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
